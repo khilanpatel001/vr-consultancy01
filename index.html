@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Consultancy - Business Solutions</title>
+    <style>
+        /* ------------------------------ Resetting default styles ------------------------------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ------------------------------ Body Styling ------------------------------ */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: url('back.jpg') center/cover no-repeat fixed;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* ------------------------------ Navigation Bar ------------------------------ */
+        nav {
+            background-color: rgba(29, 78, 216, 0.8);
+            padding: 1px 20px;
+            position: fixed;
+            width: 100%;
+            top: -36px;
+            left: 0;
+            z-index: 1000;
+            transition: padding 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 30px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff7f0;
+        }
+
+        /* Logo Styling */
+        .logo {
+            width: 120px;
+            transition: width 0.3s ease;
+        }
+
+        /* Shrink logo on scroll */
+        .scrolled .logo {
+            width: 80px;
+        }
+
+        /* ------------------------------ Header Section ------------------------------ */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5); /* Dark transparent background to make text stand out */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 70px; /* Space for the fixed navbar */
+            height: 100vh;
+        }
+
+        header h1 {
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            background-color: #1d4ed8;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: #2563eb;
+        }
+
+        /* ------------------------------ Service Box Section ------------------------------ */
+        .glass-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            border-radius: 12px;
+        }
+
+        /* ------------------------------ Rectangle Box with Glass Effect ------------------------------ */
+        .rect-box {
+            background: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        .rect-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .rect-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .rect-box h2 {
+            font-size: 1.6em;
+            color: #1d4ed8;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .rect-box p {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* ------------------------------ Contact Section ------------------------------ */
+        .contact-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+        }
+
+        .contact-box p {
+            font-size: 1.2em;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .contact-box strong {
+            font-weight: 600;
+            color: #1d4ed8;
+        }
+
+        /* ------------------------------ Footer Section ------------------------------ */
+        footer {
+            background-color: #1d4ed8;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.2em;
+        }
+
+        footer p {
+            margin-top: 10px;
+        }
+
+        /* ------------------------------ Responsive Design ------------------------------ */
+        @media screen and (max-width: 1024px) {
+            header h1 {
+                font-size: 3.5em;
+            }
+
+            header p {
+                font-size: 1.3em;
+            }
+
+            .cta-button {
+                font-size: 1.1em;
+                padding: 14px 35px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2.8em;
+            }
+
+            header p {
+                font-size: 1.3em;
+            }
+
+            .cta-button {
+                font-size: 1em;
+                padding: 12px 30px;
+            }
+
+            .rect-box {
+                height: auto;
+                padding: 20px;
+            }
+
+            .glass-container {
+                grid-template-columns: 1fr;
+                padding: 30px 10px;
+            }
+
+            footer {
+                padding: 20px 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            .cta-button {
+                font-size: 0.9em;
+                padding: 10px 25px;
+            }
+
+            nav a {
+                font-size: 1em;
+            }
+
+            footer {
+                font-size: 1em;
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header id="home">
+        <h1>VR Consultancy</h1>
+        <p>Professional Services to Ensure Your Business Compliance and Growth</p>
+        <a href="#services" class="cta-button">Explore Services</a>
+    </header>
+
+    <!-- Service Descriptions -->
+    <div class="glass-container" id="services">
+        <!-- Service Box 1 -->
+        <div class="rect-box">
+            <img src="image1.jpg" alt="Legal Requirements">
+            <h2>Legal Requirements</h2>
+            <p>Our team helps navigate through complex legal processes, ensuring compliance with necessary regulations like Fire NOCs, Shop & Establishment registrations, and more.</p>
+        </div>
+
+        <!-- Service Box 2 -->
+        <div class="rect-box">
+            <img src="image2.jpg" alt="Business Setup">
+            <h2>Business Setup</h2>
+            <p>Start your business with confidence. From company registrations to legal documentation, we ensure a seamless setup with everything in place for success.</p>
+        </div>
+
+        <!-- Service Box 3 -->
+        <div class="rect-box">
+            <img src="image3.jpg" alt="Build Expertise">
+            <h2>Expert Guidance</h2>
+            <p>Our expert consultants provide insights to guide your business through the intricacies of compliance, optimizing your operations for efficiency and growth.</p>
+        </div>
+
+        <!-- Service Box 4 -->
+        <div class="rect-box">
+            <img src="image4.jpg" alt="Service Portfolio">
+            <h2>Service Portfolio</h2>
+            <p>Our comprehensive portfolio covers all business compliance needs, ensuring you have access to tailored services that suit your industry-specific requirements.</p>
+        </div>
+
+        <!-- Service Box 5 -->
+        <div class="rect-box">
+            <img src="image5.jpg" alt="Marketing Strategies">
+            <h2>Marketing & Growth</h2>
+            <p>Leverage our marketing expertise to develop strategies that promote growth and improve brand visibility. We tailor campaigns to meet your business goals effectively.</p>
+        </div>
+
+        <!-- Service Box 6 -->
+        <div class="rect-box">
+            <img src="image6.jpg" alt="Operational Tools">
+            <h2>Operational Tools</h2>
+            <p>Stay ahead with automated operational tools that streamline processes, manage client data, and ensure that important deadlines, like PF and ESIC renewals, are met on time.</p>
+        </div>
+
+        <!-- Service Box 7 -->
+        <div class="rect-box">
+            <img src="image7.jpg" alt="Customer Focus">
+            <h2>Customer-Centric Approach</h2>
+            <p>We prioritize customer satisfaction with personalized services, building long-lasting relationships based on trust, transparency, and efficiency.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-box" id="contact">
+        <p>Contact us today to get started with VR Consultancy and take your business to the next level!</p>
+        <p><strong>Phone:</strong> Mr.Vishal Patel: 9726516945</p>
+        <p><strong>Phone:</strong> Mr.Ravi Tandel: 9998651751</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 VR Consultancy. All rights reserved.</p>
+        <p>Empowering your business to thrive through compliance and growth strategies.</p>
+    </footer>
+
+    <script>
+        // Shrink navbar logo on scroll
+        window.onscroll = function() {
+            if (window.pageYOffset > 50) {
+                document.querySelector("nav").classList.add("scrolled");
+            } else {
+                document.querySelector("nav").classList.remove("scrolled");
+            }
+        };
+    </script>
+</body>
+</html>
